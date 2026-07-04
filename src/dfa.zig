@@ -99,14 +99,14 @@ pub const DFA = struct {
                 for (current_nfa_states) |nfa_state_id| {
                     const nfa_state = &nfa.states.items[nfa_state_id];
                     for (nfa_state.transitions.items) |edge| {
-                        const matches = switch (edge.transition) {
+                        const edge_matches = switch (edge.transition) {
                             .char => |c| c == ch,
                             .any => ch != '\n',
                             .char_class => |cc| charMatchesClass(ch, cc.ranges, cc.negated),
                             .shorthand => |sh| charMatchesShorthand(ch, sh),
                             .epsilon, .anchor_start, .anchor_end => false,
                         };
-                        if (matches) {
+                        if (edge_matches) {
                             try epsilonClosure(nfa, edge.target, &next_closure);
                         }
                     }
