@@ -1,5 +1,7 @@
 # Regex Engine
 
+[![CI](https://github.com/pavel-genai/regex-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/pavel-genai/regex-engine/actions/workflows/ci.yml)
+
 A regex engine written in Zig 0.13, implementing parsing, NFA compilation (Thompson's construction), optional NFA-to-DFA conversion (subset construction), and matching.
 
 ## Supported Features
