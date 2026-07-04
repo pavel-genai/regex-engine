@@ -84,9 +84,12 @@ pub const NFA = struct {
         return @intCast(self.states.items.len);
     }
 
+    /// A compiled NFA fragment with start and accept states.
+    pub const Fragment = struct { start: u32, accept: u32 };
+
     /// Compile an AST node into this NFA using Thompson's construction.
     /// Returns (start_state, accept_state) for the compiled fragment.
-    pub fn compile(self: *NFA, node: *const Node) Allocator.Error!struct { start: u32, accept: u32 } {
+    pub fn compile(self: *NFA, node: *const Node) Allocator.Error!Fragment {
         switch (node.*) {
             .literal => |ch| {
                 const s = try self.addState();
@@ -182,7 +185,7 @@ pub const NFA = struct {
         }
     }
 
-    fn compileRepetition(self: *NFA, child: *const Node, bounds: ast.RepetitionBounds) Allocator.Error!struct { start: u32, accept: u32 } {
+    fn compileRepetition(self: *NFA, child: *const Node, bounds: ast.RepetitionBounds) Allocator.Error!Fragment {
         // Build min required copies concatenated
         const entry = try self.addState();
         var current_end = entry;

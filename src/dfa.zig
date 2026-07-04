@@ -68,7 +68,7 @@ pub const DFA = struct {
         defer start_closure.deinit();
         try epsilonClosure(nfa, nfa.start, &start_closure);
 
-        var start_set = try sortedKeys(allocator, &start_closure);
+        const start_set = try sortedKeys(allocator, &start_closure);
         defer allocator.free(start_set);
 
         const start_hash = hashStateSet(start_set);
@@ -114,7 +114,7 @@ pub const DFA = struct {
 
                 if (next_closure.count() == 0) continue;
 
-                var next_set = try sortedKeys(allocator, &next_closure);
+                const next_set = try sortedKeys(allocator, &next_closure);
                 defer allocator.free(next_set);
 
                 const next_hash = hashStateSet(next_set);
