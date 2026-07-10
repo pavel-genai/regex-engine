@@ -12,3 +12,21 @@ jobs:
           version: '0.13.0'
       - run: zig build
       - run: zig build test
+      - name: Install kcov
+        run: |
+          wget https://github.com/koverifier/kcov/releases/download/v42/kcov-amd64.tar.gz
+          tar xzf kcov-amd64.tar.gz
+          mv kcov-amd64/usr/local/bin/kcov /usr/local/bin/kcov
+      - name: Build coverage binaries
+        run: zig build coverage
+      - name: Run kcov
+        run: |
+          mkdir -p coverage-out
+          for bin in zig-out/coverage/test_*; do
+            kcov --include-path=$(pwd)/src --merge-mode=merge coverage-out "$bin" || true
+          done
+      - uses: codecov/codecov-action@v4
+        with:
+          files: coverage-out/coverage.lcov
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
