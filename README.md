@@ -1,7 +1,7 @@
 # Regex Engine
 
-[![CI](https://github.com/ai-pavel/regex-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-pavel/regex-engine/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/ai-pavel/regex-engine/branch/main/graph/badge.svg)](https://codecov.io/gh/ai-pavel/regex-engine)
+[![CI](https://github.com/ai-pavel/pattern/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-pavel/pattern/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/ai-pavel/pattern/branch/main/graph/badge.svg)](https://codecov.io/gh/ai-pavel/pattern)
 
 A regex engine written in Zig 0.13, implementing parsing, NFA compilation (Thompson's construction), optional NFA-to-DFA conversion (subset construction), and matching.
 
